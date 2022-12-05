@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === 'development') {
   })
 } else {
   server.register(cors, {
-    origin: /jotrends.pages.dev/,
+    origin: /trends.hhxdragon.com/,
     allowedHeaders: ['Cookie', 'Content-Type'],
     credentials: true,
   })

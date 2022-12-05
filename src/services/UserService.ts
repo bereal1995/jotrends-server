@@ -38,28 +38,26 @@ class UserService {
   }
 
   async generateTokens(user: User, tokenItem?: Token) {
-    const { id: userId, username } = user
-    const token = tokenItem ?? (await this.createTokenItem(userId))
-    const tokenId = token.id
-
-    const [accessToken, refreshToken] = await Promise.all([
-      generateToken({
-        type: 'access_token',
-        userId,
-        tokenId,
-        username,
-      }),
-      generateToken({
-        type: 'refresh_token',
-        tokenId,
-        rotationCounter: token.rotationCounter,
-      }),
-    ])
-
-    return {
-      accessToken,
-      refreshToken,
-    }
+    // const { id: userId, username } = user
+    // const token = tokenItem ?? (await this.createTokenItem(userId))
+    // const tokenId = token.id
+    // const [accessToken, refreshToken] = await Promise.all([
+    //   generateToken({
+    //     type: 'access_token',
+    //     userId,
+    //     tokenId,
+    //     username,
+    //   }),
+    //   generateToken({
+    //     type: 'refresh_token',
+    //     tokenId,
+    //     rotationCounter: token.rotationCounter,
+    //   }),
+    // ])
+    // return {
+    //   accessToken,
+    //   refreshToken,
+    // }
   }
 
   async register({ username, password }: AuthParams) {
@@ -90,33 +88,30 @@ class UserService {
   }
 
   async login({ username, password }: AuthParams) {
-    const user = await db.user.findUnique({
-      where: {
-        username,
-      },
-    })
-
-    if (!user) {
-      throw new AppError('WrongCredentials')
-    }
-
-    try {
-      const result = await bcrypt.compare(password, user.passwordHash)
-      if (!result) {
-        throw new AppError('WrongCredentials')
-      }
-    } catch (e) {
-      if (isAppError(e)) {
-        throw e
-      }
-      throw new AppError('Unknown')
-    }
-
-    const tokens = await this.generateTokens(user)
-    return {
-      user,
-      tokens,
-    }
+    // const user = await db.user.findUnique({
+    //   where: {
+    //     username,
+    //   },
+    // })
+    // if (!user) {
+    //   throw new AppError('WrongCredentials')
+    // }
+    // try {
+    //   const result = await bcrypt.compare(password, user.passwordHash)
+    //   if (!result) {
+    //     throw new AppError('WrongCredentials')
+    //   }
+    // } catch (e) {
+    //   if (isAppError(e)) {
+    //     throw e
+    //   }
+    //   throw new AppError('Unknown')
+    // }
+    // const tokens = await this.generateTokens(user)
+    // return {
+    //   user,
+    //   tokens,
+    // }
   }
 
   async refreshToken(token: string) {
@@ -173,43 +168,39 @@ class UserService {
     newPassword: string
     userId: number
   }) {
-    const user = await db.user.findUnique({
-      where: {
-        id: userId,
-      },
-    })
-
-    if (!validate.password(newPassword)) {
-      throw new AppError('BadRequest', {
-        message: 'Password is not valid',
-      })
-    }
-
-    try {
-      if (!user) {
-        throw new Error()
-      }
-      const result = await bcrypt.compare(oldPassword, user.passwordHash)
-      if (!result) {
-        throw new Error()
-      }
-    } catch (e) {
-      throw new AppError('Forbidden', {
-        message: 'Password does not match',
-      })
-    }
-
-    const passwordHash = await bcrypt.hash(newPassword, SALT_ROUNDS)
-    await db.user.update({
-      where: {
-        id: userId,
-      },
-      data: {
-        passwordHash,
-      },
-    })
-
-    return true
+    // const user = await db.user.findUnique({
+    //   where: {
+    //     id: userId,
+    //   },
+    // })
+    // if (!validate.password(newPassword)) {
+    //   throw new AppError('BadRequest', {
+    //     message: 'Password is not valid',
+    //   })
+    // }
+    // try {
+    //   if (!user) {
+    //     throw new Error()
+    //   }
+    //   const result = await bcrypt.compare(oldPassword, user.passwordHash)
+    //   if (!result) {
+    //     throw new Error()
+    //   }
+    // } catch (e) {
+    //   throw new AppError('Forbidden', {
+    //     message: 'Password does not match',
+    //   })
+    // }
+    // const passwordHash = await bcrypt.hash(newPassword, SALT_ROUNDS)
+    // await db.user.update({
+    //   where: {
+    //     id: userId,
+    //   },
+    //   data: {
+    //     passwordHash,
+    //   },
+    // })
+    // return true
   }
   unregister(userId: number) {
     return db.user.delete({

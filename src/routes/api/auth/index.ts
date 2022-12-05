@@ -14,20 +14,18 @@ const authRoute: FastifyPluginAsyncTypebox = async (fastify) => {
   const userService = UserService.getInstance()
 
   fastify.post('/login', { schema: loginSchema }, async (request, reply) => {
-    const authResult = await userService.login(request.body)
-    setTokenCookie(reply, authResult.tokens)
-
-    return authResult
+    // const authResult = await userService.login(request.body)
+    // setTokenCookie(reply, authResult.tokens)
+    // return authResult
   })
 
   fastify.post(
     '/register',
     { schema: registerSchema },
     async (request, reply) => {
-      const authResult = await userService.register(request.body)
-      setTokenCookie(reply, authResult.tokens)
-
-      return authResult
+      // const authResult = await userService.register(request.body)
+      // setTokenCookie(reply, authResult.tokens)
+      // return authResult
     },
   )
 
@@ -35,23 +33,20 @@ const authRoute: FastifyPluginAsyncTypebox = async (fastify) => {
     '/refresh',
     { schema: refreshTokenSchema },
     async (request, reply) => {
-      const refreshToken =
-        request.body.refreshToken ?? request.cookies.refresh_token ?? ''
-
-      if (!refreshToken) {
-        throw new AppError('BadRequest')
-      }
-
-      const tokens = await userService.refreshToken(refreshToken)
-      setTokenCookie(reply, tokens)
-
-      return tokens
+      // const refreshToken =
+      //   request.body.refreshToken ?? request.cookies.refresh_token ?? ''
+      // if (!refreshToken) {
+      //   throw new AppError('BadRequest')
+      // }
+      // const tokens = await userService.refreshToken(refreshToken)
+      // setTokenCookie(reply, tokens)
+      // return tokens
     },
   )
 
   fastify.post('/logout', { schema: logoutSchema }, async (request, reply) => {
-    clearCookie(reply)
-    reply.status(204)
+    // clearCookie(reply)
+    // reply.status(204)
   })
 }
 

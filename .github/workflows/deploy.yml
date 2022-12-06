@@ -14,14 +14,6 @@ jobs:
       - name: checkout release
         uses: actions/checkout@v3
 
-      - name: Clean temp directory
-        run: |
-          rm -rf *
-          cp -r $GITHUB_WORKSPACE .
-
-      - name: archive drcloud
-        run: tar cvfz ./drcloud.tar.gz *
-
       - name: AWS configure credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:

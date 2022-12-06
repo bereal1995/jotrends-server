@@ -28,6 +28,6 @@ jobs:
         run: |
           aws deploy create-deployment \
             --application-name hhtrends-server \
-            --deployment-group-name hhtrends-deploy \
+            --deployment-group-name hhtrends-deploy-group \
             --deployment-config-name CodeDeployDefault.OneAtATime \
             --github-location repository=${{ github.repository }},commitId=${{ github.sha }}

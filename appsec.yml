@@ -6,12 +6,12 @@ files:
     overwrite: yes
   hooks:
     BeforeInstall:
-      - location: scripts/remove_server
+      - location: scripts/remove_server.sh
         timeout: 300
         runas: root
     Install:
-      - location: scripts/install_app
+      - location: scripts/install_app.sh
         runas: root
     ApplicationStart:
-      - location: scripts/start_server
+      - location: scripts/start_server.sh
         runas: root

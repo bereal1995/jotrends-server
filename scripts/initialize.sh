@@ -1,5 +1,5 @@
 path=""
-filename=""
+filename=".env"
 
 if [ ${NODE_ENV} == "production" ] ; then
     path="/jotrends-server/production/"

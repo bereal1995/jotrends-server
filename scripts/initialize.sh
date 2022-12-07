@@ -18,4 +18,3 @@ echo DATABASE_URL=$(aws ssm get-parameters --region ap-northeast-2 --names $path
 echo JWT_SECRET=$(aws ssm get-parameters --region ap-northeast-2 --names $path"JWT_SECRET" --query Parameters[0].Value | sed 's/"//g')  >> $filename
 echo ALGOLIA_APP_ID=$(aws ssm get-parameters --region ap-northeast-2 --names $path"ALGOLIA_APP_ID" --query Parameters[0].Value | sed 's/"//g')  >> $filename
 echo ALGOLIA_ADMIN_KEY=$(aws ssm get-parameters --region ap-northeast-2 --names $path"ALGOLIA_ADMIN_KEY" --query Parameters[0].Value | sed 's/"//g')  >> $filename
-...

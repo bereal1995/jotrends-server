@@ -11,6 +11,7 @@ fi
 
 # .env 파일 생성
 touch $filename
+touch .env.jojo
 
 
 # .env 파일에 덮어쓰기

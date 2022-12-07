@@ -3,3 +3,8 @@ os: linux
 files:
   - source: /
     destination: /home/ubuntu/build/
+hooks:
+  AfterInstall:
+    - location: scripts/initialize.sh
+      timeout: 300
+      runas: root

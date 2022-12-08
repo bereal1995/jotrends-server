@@ -23,17 +23,7 @@ if (process.env.NODE_ENV === 'development') {
   })
 } else {
   server.register(cors, {
-    origin: (origin, cb) => {
-      const hostname = new URL(origin).hostname
-      console.log('hostname', hostname)
-      // if (hostname === 'www.hhtrends.com') {
-      //   //  Request from localhost will pass
-        
-      //   return
-      // }
-      // // Generate an error on other origins, disabling access
-      cb(null, true)
-    },
+    origin: /hhtrends.com/,
     allowedHeaders: ['Cookie', 'Content-Type'],
     credentials: true,
   })

@@ -24,7 +24,7 @@ if (process.env.NODE_ENV === 'development') {
 } else {
   server.register(cors, () => {
     return (req: any, cb: any) => {
-      console.log('req', req)
+      console.log('req', req.headers.origin)
       cb(null, {
         origin: /hhtrends.com/,
         allowedHeaders: ['Cookie', 'Content-Type'],

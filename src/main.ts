@@ -26,13 +26,13 @@ if (process.env.NODE_ENV === 'development') {
     origin: (origin, cb) => {
       const hostname = new URL(origin).hostname
       console.log('hostname', hostname)
-      if (hostname === 'www.hhtrends.com') {
-        //  Request from localhost will pass
-        cb(null, true)
-        return
-      }
-      // Generate an error on other origins, disabling access
-      cb(new Error('Not allowed'), false)
+      // if (hostname === 'www.hhtrends.com') {
+      //   //  Request from localhost will pass
+        
+      //   return
+      // }
+      // // Generate an error on other origins, disabling access
+      cb(null, true)
     },
     allowedHeaders: ['Cookie', 'Content-Type'],
     credentials: true,

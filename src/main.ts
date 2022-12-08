@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === 'development') {
     origin: (origin, cb) => {
       const hostname = new URL(origin).hostname
       console.log('hostname', hostname)
-      if (hostname === 'hhtrend') {
+      if (hostname === 'www.hhtrends.com') {
         //  Request from localhost will pass
         cb(null, true)
         return

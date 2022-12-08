@@ -23,7 +23,17 @@ if (process.env.NODE_ENV === 'development') {
   })
 } else {
   server.register(cors, {
-    origin: /hhtrends.com/,
+    origin: (origin, cb) => {
+      const hostname = new URL(origin).hostname
+      console.log('hostname', hostname)
+      if (hostname === 'hhtrend') {
+        //  Request from localhost will pass
+        cb(null, true)
+        return
+      }
+      // Generate an error on other origins, disabling access
+      cb(new Error('Not allowed'), false)
+    },
     allowedHeaders: ['Cookie', 'Content-Type'],
     credentials: true,
   })
@@ -32,7 +42,7 @@ if (process.env.NODE_ENV === 'development') {
 if (process.env.NODE_ENV !== 'production') {
   await server.register(fastifySwagger, swaggerConfig)
 }
-server.register(fastifyCookie)
+server.register(fastifyCookie, {})
 
 server.setErrorHandler(async (error, request, reply) => {
   reply.statusCode = error.statusCode ?? 500

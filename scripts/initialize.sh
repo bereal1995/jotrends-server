@@ -1,6 +1,8 @@
 path=""
 filename=".env"
 
+touch .env.jojo2
+
 if [ ${NODE_ENV} == "production" ] ; then
     path="/jotrends-server/production/"
     filename=".env.production"

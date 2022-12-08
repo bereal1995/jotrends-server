@@ -22,10 +22,15 @@ if (process.env.NODE_ENV === 'development') {
     credentials: true,
   })
 } else {
-  server.register(cors, {
-    origin: /hhtrends.com/,
-    allowedHeaders: ['Cookie', 'Content-Type'],
-    credentials: true,
+  server.register(cors, () => {
+    return (req: any, cb: any) => {
+      console.log('req', req)
+      cb(null, {
+        origin: /hhtrends.com/,
+        allowedHeaders: ['Cookie', 'Content-Type'],
+        credentials: true,
+      })
+    }
   })
 }
 
